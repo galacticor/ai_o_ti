@@ -48,12 +48,8 @@ def get_wind_and_rain(lat: float, lon: float) -> Tuple[float, float]:
 
     response = get_request(url, headers, params=params)
     if response.status == 200:
-        wind = response.data.get("wind", {}).get("speed")
-        rain = response.data.get("rain", {}).get("1h")
+        wind = response.data.get("wind", {}).get("speed", 0)
+        rain = response.data.get("rain", {}).get("1h", 0)
         return wind, rain
 
     raise Exception("Error when get_wind_and_rain")
-
-
-def save_data(data):
-    print(data)

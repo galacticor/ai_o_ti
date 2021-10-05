@@ -1,5 +1,6 @@
+from aioti.db import put_data
 from aioti.models import predict
-from aioti.utils import get_wind_and_rain, save_data
+from aioti.utils import get_wind_and_rain
 
 
 def handler(event, context):
@@ -10,4 +11,4 @@ def handler(event, context):
     event['wind'] = wind
     event['risiko'] = predict(event)
 
-    save_data(event)
+    put_data(event)

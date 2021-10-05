@@ -15,6 +15,7 @@ def _get_model():
 
 def predict(data: dict) -> float:
     X = transform_data(data)
+    print(X)
 
     y = _get_model().predict_proba(nparray(X))
     return y[0][1]
