@@ -18,6 +18,6 @@ def put_data(data):
         print(data)
         return
 
-    table = _get_client().Table('Movies')
+    table = _get_client().Table('gemastik_aioti')
     response = table.put_item(Item=data)
     return response
