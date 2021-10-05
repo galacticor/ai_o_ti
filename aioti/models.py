@@ -1,13 +1,14 @@
 import pickle
+from numpy import array as nparray
 from typing import List
-from sklearn.linear_model._logistic import LogisticRegression
 
-MODEL_PATH = ''
-model: LogisticRegression = None
+MODEL_PATH = './model.pkl'
+model = None
 
-def get_model():
-    global model 
-    model = pickle.load(open(MODEL_PATH, 'rb'))
+def _get_model():
+    global model
+    if model is None:
+        model = pickle.load(open(MODEL_PATH, 'rb'))
 
     return model
 
@@ -15,7 +16,7 @@ def get_model():
 def predict(data: dict) -> float:
     X = transform_data(data)
 
-    y = model.predict_proba(X)
+    y = _get_model().predict_proba(nparray(X))
     return y[0][1]
 
 

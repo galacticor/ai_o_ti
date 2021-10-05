@@ -1,12 +1,11 @@
 import requests
+import os
 from typing import Any, Dict, Tuple
 from json.decoder import JSONDecodeError
 from dataclasses import dataclass
 
-from requests import api
-
 DEFAULT_HTTP_TIMEOUT = 30
-API_KEY = "177d8bc1d6598788cb66150e030e73d3"
+API_KEY = os.getenv("API_KEY")
 
 
 @dataclass
@@ -42,7 +41,7 @@ def get_default_headers() -> Dict[str, str]:
 
 def get_wind_and_rain(lat: float, lon: float) -> Tuple[float, float]:
     # api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-    url = "api.openweathermap.org/data/2.5/weather"
+    url = "http://api.openweathermap.org/data/2.5/weather"
 
     headers = get_default_headers()
     params = {"lat": round(lat, 2), "lon": round(lon, 2), "appid": API_KEY}
@@ -54,3 +53,7 @@ def get_wind_and_rain(lat: float, lon: float) -> Tuple[float, float]:
         return wind, rain
 
     raise Exception("Error when get_wind_and_rain")
+
+
+def save_data(data):
+    print(data)
